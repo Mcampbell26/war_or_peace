@@ -30,15 +30,15 @@ class Deck
       end
       high_rank
     end
-      (high_rank.count.to_f / @cards.count).round(4) * 100
+    (high_rank.count.to_f / @cards.count).round(4) * 100
   end
 
+  def remove_card
+    @cards.shift
+  end
+
+  def add_card(card)
+    @cards << card
+  end
 
 end
-
-
-  # def remove_card
-  # end
-  #
-  # def add_card
-  # end
