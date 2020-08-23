@@ -28,10 +28,10 @@ class TurnTest < Minitest::Test
     assert_instance_of Turn, turn
     assert_equal player1, turn.player1
     assert_equal player2, turn.player2
-    # binding.pry
+
   end
 
-  def test_type
+  def test_type_war
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -42,8 +42,8 @@ class TurnTest < Minitest::Test
     card8 = Card.new(:diamond, '2', 2)
     card9 = Card.new(:spade, '2', 2)
 
-    deck1 = Deck.new([card2, card4, card5, card8])
-    deck2 = Deck.new([card4, card3, card9, card7])
+    deck1 = Deck.new([card1, card4, card8, card5])
+    deck2 = Deck.new([card4, card3, card7, card9])
 
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck2)
@@ -53,7 +53,52 @@ class TurnTest < Minitest::Test
     assert_equal :war, turn.type
   end
 
+  def test_type_basic
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    card9 = Card.new(:spade, '2', 2)
+
+    deck1 = Deck.new([card6, card4, card8, card5])
+    deck2 = Deck.new([card4, card3, card7, card9])
+
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+
+    turn = Turn.new(player1, player2)
+
+    assert_equal :basic, turn.type
+  end
+
+  def test_type_mutually_assured_destruction
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    card9 = Card.new(:spade, '2', 2)
+
+    deck1 = Deck.new([card6, card4, card8, card5])
+    deck2 = Deck.new([card4, card3, card7, card9])
+
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+
+    turn = Turn.new(player1, player2)
+
+    assert_equal :basic, turn.type
+  end
+
   def test_winner_basic
+    # skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -75,58 +120,80 @@ class TurnTest < Minitest::Test
     assert_equal player1, turn.winner
   end
 
-def test_winner_war
-  card1 = Card.new(:heart, 'Jack', 11)
-  card2 = Card.new(:heart, '10', 10)
-  card3 = Card.new(:heart, '9', 9)
-  card4 = Card.new(:diamond, 'Jack', 11)
-  card5 = Card.new(:heart, '8', 8)
-  card6 = Card.new(:diamond, 'Queen', 12)
-  card7 = Card.new(:heart, '3', 3)
-  card8 = Card.new(:diamond, '2', 2)
-  card9 = Card.new(:spade, '2', 2)
+  def test_winner_war
+    skip
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    card9 = Card.new(:spade, '2', 2)
 
-  deck1 = Deck.new([card1, card2, card5, card8])
-  deck2 = Deck.new([card4, card3, card9, card7])
+    deck1 = Deck.new([card1, card2, card5, card8])
+    deck2 = Deck.new([card4, card3, card9, card7])
 
-  player1 = Player.new("Megan", deck1)
-  player2 = Player.new("Aurora", deck2)
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
 
-  turn = Turn.new(player1, player2)
+    turn = Turn.new(player1, player2)
 
-  assert_equal player1, turn.winner
+    assert_equal player1, turn.winner
+
+  end
+
+  def test_winner_war
+    skip
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    card9 = Card.new(:spade, '2', 2)
+
+    deck1 = Deck.new([card1, card2, card8, card5])
+    deck2 = Deck.new([card4, card3, card9, card7])
+
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+
+    turn = Turn.new(player1, player2)
+
+    assert_equal "No Winner", turn.winner
+
+  end
+
+  def test_pile_cards
+    skip
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    card9 = Card.new(:spade, '2', 2)
+
+    deck1 = Deck.new([card2, card1, card8, card5])
+    deck2 = Deck.new([card4, card3, card9, card7])
+
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+
+    turn = Turn.new(player1, player2)
+
+# binding.pry
+
+  end
 
 end
 
-def test_winner_war
-  card1 = Card.new(:heart, 'Jack', 11)
-  card2 = Card.new(:heart, '10', 10)
-  card3 = Card.new(:heart, '9', 9)
-  card4 = Card.new(:diamond, 'Jack', 11)
-  card5 = Card.new(:heart, '8', 8)
-  card6 = Card.new(:diamond, 'Queen', 12)
-  card7 = Card.new(:heart, '3', 3)
-  card8 = Card.new(:diamond, '2', 2)
-  card9 = Card.new(:spade, '2', 2)
-
-  deck1 = Deck.new([card1, card2, card8, card5])
-  deck2 = Deck.new([card4, card3, card9, card7])
-
-  player1 = Player.new("Megan", deck1)
-  player2 = Player.new("Aurora", deck2)
-
-  turn = Turn.new(player1, player2)
-
-  assert_equal "No Winner", turn.winner
-
-end
-
-# pry(main)> turn.type
-# #=> :basic
-#
-# pry(main)> winner = turn.winner
-# #=> #<Player:0x007fa3edae29d0 @deck=#<Deck:0x007fa3eda472c8...>, @name="Megan">
-#
 # pry(main)> turn.pile_cards
 #
 # pry(main)> turn.spoils_of_war
@@ -253,4 +320,4 @@ end
 # pry(main)> player1.deck
 # #=> #<Deck:0x007fadaf94aae8 @cards=[#<Card:0x007fadaf96b180...>]>
 # pry(main)> player2.deck
-# #=> #<Deck:0x007fadb1086f40 @cards=[#<Card:0x007fadaf130858...>]>
+# #=> #<Deck:0x007fadb1086f40 @cards=[#<Card:0x007fadaf130858...>]

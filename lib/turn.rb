@@ -12,39 +12,46 @@ class Turn
   end
 
   def type
-    if (turn.player1.deck.rank_of_card_at(0) == turn.player2.deck.rank_of_card_at(0)) &&
-       (turn.player1.deck.rank_of_card_at(2) == turn.player1.deck.rank_of_card_at(2))
+    if (@player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)) &&
+       (@player1.deck.rank_of_card_at(2) == @player2.deck.rank_of_card_at(2))
        return :mutually_assured_destruction
 
-    elsif turn.player1.deck.rank_of_card_at(0) == turn.player2.deck.rank_of_card_at(0)
+    elsif @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)
         return :war
 
     else
       return :basic
+    end
   end
 
   def winner
     case type
-      when :basic
-        if turn.player1.deck.rank_of_card_at(0) > turn.player2.deck.rank_of_card_at(0)
-          return player1
+    when :basic
+      if @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
+        return player1
 
-        else
-          return player2
-        end
+      else
+        return player2
+      end
 
-      when :war
-        if turn.player1.deck.rank_of_card_at(2) > turn.player2.deck.rank_of_card_at(2)
-          return player1
+    when :war
+      if @player1.deck.rank_of_card_at(2) > @player2.deck.rank_of_card_at(2)
+        return player1
 
-        else
-          return player2
-        end
+      else
+        return player2
+      end
 
-      when :mutually_assured_destruction
-          return "No Winner"
-        end
+    when :mutually_assured_destruction
+        return "No Winner"
     end
-
-    
+  end
+#
+#   def pile_cards
+#     case type
+#     when :basic
+#       turn.player.deck.remove_card(card)
+#       @spoils_of_war << card
+#   end
+# end
 end
