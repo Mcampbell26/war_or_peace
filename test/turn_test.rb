@@ -167,7 +167,7 @@ class TurnTest < Minitest::Test
 
   end
 
-  def test_pile_cards
+  def test_pile_cards_basic
     # skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
@@ -186,9 +186,58 @@ class TurnTest < Minitest::Test
     player2 = Player.new("Aurora", deck2)
 
     turn = Turn.new(player1, player2)
-# binding.pry
+
     assert_equal :basic, turn.type
     assert_equal [card2, card4], turn.pile_cards
+  end
+
+  def test_pile_cards_war
+    # skip
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    card9 = Card.new(:spade, '2', 2)
+
+    deck1 = Deck.new([card1, card2, card8, card5])
+    deck2 = Deck.new([card4, card3, card7, card9])
+
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+
+    turn = Turn.new(player1, player2)
+# binding.pry
+    assert_equal :war, turn.type
+    assert_equal [card1, card2, card8, card4, card3, card7], turn.pile_cards
+  end
+
+  def test_pile_cards_mutually_assured_destruction
+    # skip
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+    card9 = Card.new(:spade, '2', 2)
+
+    deck1 = Deck.new([card1, card2, card8, card5])
+    deck2 = Deck.new([card4, card3, card9, card7])
+
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+
+    turn = Turn.new(player1, player2)
+
+    turn.pile_cards
+
+    assert_equal [card5, card7], (deck1.cards + deck2.cards)
   end
 
 end

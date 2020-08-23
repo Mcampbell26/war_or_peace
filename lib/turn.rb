@@ -52,11 +52,40 @@ class Turn
     # binding.pry
     case type
     when :basic
-      # @spoils_of_war = []
       ante1 = player1.deck.remove_card
       ante2 = player2.deck.remove_card
       @spoils_of_war << ante1
       @spoils_of_war << ante2
+
+    when :war
+      ante1 = []
+      ante2 = []
+      ante1 << player1.deck.remove_card
+      ante1 << player1.deck.remove_card
+      ante1 << player1.deck.remove_card
+      ante2 << player2.deck.remove_card
+      ante2 << player2.deck.remove_card
+      ante2 << player2.deck.remove_card
+
+      @spoils_of_war << ante1
+      @spoils_of_war << ante2
+      @spoils_of_war.flatten
+
+    when :mutually_assured_destruction
+      trash = []
+      ante1 = []
+      ante2 = []
+      ante1 << player1.deck.remove_card
+      ante1 << player1.deck.remove_card
+      ante1 << player1.deck.remove_card
+      ante2 << player2.deck.remove_card
+      ante2 << player2.deck.remove_card
+      ante2 << player2.deck.remove_card
+
+      trash << ante1
+      trash << ante2
   end
+
+  
 end
 end
