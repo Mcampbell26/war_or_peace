@@ -4,12 +4,12 @@ class Turn
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
-    @spoils_of_war = []
+    @spoils_of_war = spoils_of_war
   end
 
-  def spoils_of_war
-    @spoils_of_war
-  end
+  # def spoils
+  #   @spoils_of_war = []
+  # end
 
   def type
     if (@player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)) &&
@@ -47,11 +47,16 @@ class Turn
     end
   end
 #
-#   def pile_cards
-#     case type
-#     when :basic
-#       turn.player.deck.remove_card(card)
-#       @spoils_of_war << card
-#   end
-# end
+  def pile_cards
+    @spoils_of_war = []
+    # binding.pry
+    case type
+    when :basic
+      # @spoils_of_war = []
+      ante1 = player1.deck.remove_card
+      ante2 = player2.deck.remove_card
+      @spoils_of_war << ante1
+      @spoils_of_war << ante2
+  end
+end
 end

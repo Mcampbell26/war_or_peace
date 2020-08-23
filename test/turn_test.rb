@@ -86,19 +86,18 @@ class TurnTest < Minitest::Test
     card8 = Card.new(:diamond, '2', 2)
     card9 = Card.new(:spade, '2', 2)
 
-    deck1 = Deck.new([card6, card4, card8, card5])
-    deck2 = Deck.new([card4, card3, card7, card9])
+    deck1 = Deck.new([card1, card4, card8, card5])
+    deck2 = Deck.new([card4, card3, card9, card7])
 
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck2)
 
     turn = Turn.new(player1, player2)
 
-    assert_equal :basic, turn.type
+    assert_equal :mutually_assured_destruction, turn.type
   end
 
   def test_winner_basic
-    # skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -121,7 +120,7 @@ class TurnTest < Minitest::Test
   end
 
   def test_winner_war
-    skip
+# skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -132,20 +131,20 @@ class TurnTest < Minitest::Test
     card8 = Card.new(:diamond, '2', 2)
     card9 = Card.new(:spade, '2', 2)
 
-    deck1 = Deck.new([card1, card2, card5, card8])
-    deck2 = Deck.new([card4, card3, card9, card7])
+    deck1 = Deck.new([card1, card2, card8, card8])
+    deck2 = Deck.new([card4, card3, card7, card9])
 
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck2)
 
     turn = Turn.new(player1, player2)
 
-    assert_equal player1, turn.winner
+    assert_equal player2, turn.winner
 
   end
 
-  def test_winner_war
-    skip
+  def test_winner_mutual_destruction
+    # skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -169,7 +168,7 @@ class TurnTest < Minitest::Test
   end
 
   def test_pile_cards
-    skip
+    # skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -187,9 +186,9 @@ class TurnTest < Minitest::Test
     player2 = Player.new("Aurora", deck2)
 
     turn = Turn.new(player1, player2)
-
 # binding.pry
-
+    assert_equal :basic, turn.type
+    assert_equal [card2, card4], turn.pile_cards
   end
 
 end
