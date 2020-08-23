@@ -29,7 +29,6 @@ class PlayerTest < Minitest::Test
     deck = Deck.new(cards)
 
     player = Player.new('Clarisa', deck)
-binding.pry
     assert_equal false, player.has_lost?
   end
 

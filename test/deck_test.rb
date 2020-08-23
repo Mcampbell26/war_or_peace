@@ -84,17 +84,3 @@ class DeckTest < Minitest::Test
    end
 
 end
-
-# pry(main)> card4 = Card.new(:club, '5', 5)
-# #=> #<Card:0x007fbfd2963978 @rank=5, @suit=:club, @value="5">
-#
-# pry(main)> deck.add_card(card4)
-#
-# pry(main)> deck.cards
-# #=> [#<Card:0x007fbfd19f4fa0...>, #<Card:0x007fbfd18555a0...>, #<Card:0x007fbfd2963978...>]
-#
-# pry(main)> deck.high_ranking_cards
-# #=> [#<Card:0x007fbfd18555a0...>]
-#
-# pry(main)> deck.percent_high_ranking
-# #=> 33.33
